@@ -1,7 +1,11 @@
 #include <stdio.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#if defined(__APPLE__) && defined(__MACH__) || defined(__ellcc__ )
+#include <limits.h>
+#else
 #include <linux/limits.h>
+#endif
 #include <errno.h>
 #include <string.h>
 #include <stdlib.h>

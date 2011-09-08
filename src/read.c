@@ -6,6 +6,12 @@
 #include "hash.h"
 #include "log.h"
 
+#if defined(__APPLE__) && defined(__MACH__) || defined(__ellcc__ )
+#define BADFD EBADF
+#else
+#define BADFD EBADFD
+#endif
+
 ssize_t pread(int, void *, size_t, off_t);
 
 int
@@ -25,7 +31,7 @@ dfs_read(const char *path,
         fd = pentry_get_fd(pe);
         if (fd < 0) {
                 LOG(LOG_ERR, "unusable file descriptor fd=%d", fd);
-                ret = -EBADFD;
+                ret = -BADFD;
                 goto end;
         }
 

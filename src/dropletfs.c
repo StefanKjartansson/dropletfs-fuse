@@ -9,7 +9,8 @@
 #include <glib.h>
 #include <pthread.h>
 
-#define FUSE_USE_VERSION 29
+#define FUSE_USE_VERSION  27
+//#define FUSE_USE_VERSION 29
 #include <fuse.h>
 
 #include "hash.h"

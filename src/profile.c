@@ -18,8 +18,8 @@ extern struct conf *conf;
 static FILE *fp_log;
 static int log_started = 0;
 static int depth = 1;
-static __thread struct timeval tv_enter;
-static __thread struct timeval tv_exit;
+//static __thread struct timeval tv_enter;
+//static __thread struct timeval tv_exit;
 static GHashTable *symbols;
 
 /* symbol entry in the hashtable */
@@ -78,7 +78,7 @@ __cyg_profile_func_enter(void *this,
         if (strncasecmp("dfs_", info.dli_sname, 4))
                 return;
 
-        gettimeofday(&tv_enter, NULL);
+        //gettimeofday(&tv_enter, NULL);
 
         se = g_hash_table_lookup(symbols, info.dli_sname);
         if (! se) {
@@ -99,10 +99,11 @@ __cyg_profile_func_enter(void *this,
                         }
                 }
         }
-
+        /*
         fprintf(fp_log, "%d.%06d %.*s %s@%p\n",
                 (int)tv_enter.tv_sec, (int)tv_enter.tv_usec,
                 depth, ">", info.dli_sname, this);
+        */
         depth++;
 
 }
@@ -128,15 +129,17 @@ __cyg_profile_func_exit(void *this,
 
         if (strncasecmp("dfs_", info.dli_sname, 4))
                 return;
-
+        tdiff = 0;
+        /*
         gettimeofday(&tv_exit, NULL);
         tdiff = time_diff(&tv_enter, &tv_exit);
-
+        */
         depth--;
+        /*
         fprintf(fp_log, "%d.%06d %.*s %s@%p -- %dms\n",
                 (int)tv_exit.tv_sec, (int)tv_exit.tv_usec,
                 depth, "<", info.dli_sname, this, tdiff);
-
+        */
         se = g_hash_table_lookup(symbols, info.dli_sname);
         if (se) {
                 se->n_calls++;

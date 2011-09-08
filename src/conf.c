@@ -337,7 +337,7 @@ parse_token(struct conf * conf,
                         goto err;
                 }
                 if (-1 == conf_set_full_cache_dir(conf)) {
-                        fprintf(stderr, "can't build the cache directory\n");
+                        fprintf(stderr, "can't build the cache directory: %s\n", CACHE_DIR);
                         ret = -1;
                         goto err;
                 }

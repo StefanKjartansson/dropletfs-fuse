@@ -7,21 +7,26 @@ int vsnprintf(char *, size_t, const char *, va_list);
 
 
 
-static __thread char strings[TMPSTR_NB][TMPSTR_MAX];
-static __thread unsigned current;
+//static __thread char strings[TMPSTR_NB][TMPSTR_MAX];
+//static __thread unsigned current;
 
 char *
 tmpstr_new(void)
 {
+    return "";
+    /*
         if (++current >= TMPSTR_NB)
                 current = 0;
 
         return strings[current];
+    */
 }
+
 
 char *
 tmpstr_printf(char const *fmt, ...)
 {
+    /*
         char *buf = NULL;
         va_list ap;
 
@@ -30,4 +35,6 @@ tmpstr_printf(char const *fmt, ...)
         vsnprintf(buf, TMPSTR_MAX, fmt, ap);
         va_end(ap);
         return buf;
+    */
+    return "";
 }
